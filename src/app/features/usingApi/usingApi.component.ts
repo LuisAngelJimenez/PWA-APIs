@@ -11,17 +11,17 @@ import { ResponseKanye } from '../../data/interfaces/response';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class UsingApiComponent {
-  public quote = signal<ResponseKanye | null>(null);
+  public quote = signal < ResponseKanye | null > ( null );
 
   constructor(private AS: APIService) {
     this.ObtainingData();
   }
 
-  public ObtainingData() {
+  public ObtainingData () {
     this.AS.getData().subscribe(
-      ( data: ResponseKanye ) => {
-        console.log("tu frase de kanye del dia: " +data.quote);
-        this.quote.set(data);
+      ( data : ResponseKanye ) => {
+        console.log( "tu frase de kanye del dia: " + data.quote );
+        this.quote.set( data );
       },
     );
   }

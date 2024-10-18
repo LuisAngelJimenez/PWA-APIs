@@ -8,9 +8,9 @@ import { ResponseKanye } from '../data/interfaces/response';
 export class APIService {
   private url = 'https://api.kanye.rest';
 
-  constructor(private http:HttpClient) {}
+  constructor( private http : HttpClient ) {}
 
   public getData() {
-    return this.http.get<ResponseKanye>(this.url);
+    return this.http.get< ResponseKanye > ( this.url );
   }
 }

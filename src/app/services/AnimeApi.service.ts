@@ -8,11 +8,11 @@ import { ResponseAnime } from '../data/interfaces/response';
 export class AnimeApiService {
   private url = 'https://api.jikan.moe/v4/random/anime'
 
-  constructor(private http:HttpClient) { 
+  constructor( private http : HttpClient ) { 
 
   }
   public ObtainData( ){ 
-    return this.http.get<ResponseAnime>(this.url);
+    return this.http.get< ResponseAnime >( this.url );
   }
 
 }

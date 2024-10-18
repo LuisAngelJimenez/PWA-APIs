@@ -1,12 +1,12 @@
 export interface ResponseKanye {
-    quote: string;
+    quote : string;
 }
 export interface ResponseAnime {
-    data: {
-      title: string;
-      images:{
-        jpg:{
-            image_url: string;
+    data : {
+      title : string;
+      images : {
+        jpg : {
+            large_image_url : string;
             }
       }
     };

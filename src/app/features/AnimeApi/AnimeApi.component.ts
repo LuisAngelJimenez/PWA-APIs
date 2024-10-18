@@ -6,34 +6,28 @@ import { ResponseAnime } from '../../data/interfaces/response';
 @Component({
   selector: 'app-anime-api',
   standalone: true,
-  imports: [
-    CommonModule,
-  ],
+  imports: [ CommonModule ],
   templateUrl: './AnimeApi.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class AnimeApiComponent {
+  public animeSignal = signal < ResponseAnime | null >( null );
 
-  public animeSignal = signal < ResponseAnime | null > ( null ) ;
+  constructor( private As : AnimeApiService ) {
+    this.obtainingData();
+  }
 
-    constructor( private As:AnimeApiService ){
-      this.obtainingData();
-
-    }
-
-    obtainingData() {
-      this.As.ObtainData().subscribe(
-        ( response: ResponseAnime ) => {
-          console.log( 'obteniendo un anime' , response );
-          console.log( 'obteniendo su título' , response.data.title );
-          console.log( 'obteniendo su imagen ' , response.data.images.jpg.image_url );
-          
-          this.animeSignal.set({
-            data: { 
-              title: response.data.title,
-              images:response.data.images 
-            }});
-        }
-      );
-    }
- }
+  public obtainingData() {
+    this.As.ObtainData().subscribe(( response : ResponseAnime ) => {
+      console.log( 'obteniendo un anime' , response );
+      console.log( 'obteniendo su título' , response.data.title );
+      console.log( 'obteniendo su imagen ', response.data.images.jpg.large_image_url );
+      this.animeSignal.set({
+        data : {
+          title : response.data.title,
+          images : response.data.images,
+        },
+      });
+    });
+  }
+}
