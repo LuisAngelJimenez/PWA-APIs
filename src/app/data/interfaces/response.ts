@@ -2,10 +2,11 @@ export interface ResponseKanye {
     quote : string;
 }
 
-
 export interface Pokemon {
   name: string;
-  
+  sprites: {
+    front_default: string;
+  };
 }
 
 export interface ResponsePokemon {

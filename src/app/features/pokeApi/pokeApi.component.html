@@ -1,8 +1,8 @@
-<div class="bg-red-400 p-4">
-    <h2 class="text-lg font-bold mb-4">Listado de Pokémon</h2>
-    <ul>
-      <li *ngFor="let pokemon of pokeSignal()">
-        {{ pokemon.name }}
-    </li>
-    </ul>
+<div class="pokemon-list grid grid-cols-2 gap-4">
+  @for ( pokemon of pokeSignal() ; track $index ) {
+    <div class="card p-4 bg-gray-100 rounded-lg shadow-md">
+      <img [src]="pokemon.sprites.front_default" class="h-20 w-20 mx-auto mb-2">
+      <h3 class="text-center text-xl font-bold">{{ pokemon.name }}</h3>
+    </div>
+  }
 </div>
