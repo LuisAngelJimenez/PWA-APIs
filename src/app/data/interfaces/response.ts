@@ -1,6 +1,17 @@
 export interface ResponseKanye {
     quote : string;
 }
+
+
+export interface Pokemon {
+  name: string;
+  
+}
+
+export interface ResponsePokemon {
+  results: Pokemon[];
+}
+
 export interface ResponseAnime {
     data : {
       title : string;

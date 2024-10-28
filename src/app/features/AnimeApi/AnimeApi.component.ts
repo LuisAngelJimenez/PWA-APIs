@@ -11,14 +11,19 @@ import { ResponseAnime } from '../../data/interfaces/response';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class AnimeApiComponent {
+
   public animeSignal = signal < ResponseAnime | null >( null );
 
   constructor( private As : AnimeApiService ) {
+
     this.obtainingData();
+
   }
 
   public obtainingData() {
+
     this.As.ObtainData().subscribe(( response : ResponseAnime ) => {
+
       console.log( 'obteniendo un anime' , response );
       console.log( 'obteniendo su título' , response.data.title );
       console.log( 'obteniendo su imagen ', response.data.images.jpg.large_image_url );
@@ -29,5 +34,6 @@ export default class AnimeApiComponent {
         },
       });
     });
+
   }
 }

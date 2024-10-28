@@ -10,6 +10,10 @@ export const routes: Routes = [
         loadComponent : () => import ( './features/usingApi/usingApi.component' )
     },
     {
+        path:'pokeApi',
+        loadComponent: () => import ( './features/pokeApi/pokeApi.component' )
+    },
+    {
         path : '**',
         redirectTo : 'usingApi'
     }

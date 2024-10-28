@@ -1,0 +1,8 @@
+<div class="bg-red-400 p-4">
+    <h2 class="text-lg font-bold mb-4">Listado de Pokémon</h2>
+    <ul>
+      <li *ngFor="let pokemon of pokeSignal()">
+        {{ pokemon.name }}
+    </li>
+    </ul>
+</div>
