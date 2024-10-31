@@ -11,18 +11,21 @@ import { ResponseKanye } from '../../data/interfaces/response';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class UsingApiComponent {
-  public quote = signal < ResponseKanye | null > ( null );
+  public quote = signal < ResponseKanye | null >( null );
 
-  constructor(private AS: APIService) {
+  constructor( private AS : APIService ) {
     this.ObtainingData();
   }
 
-  public ObtainingData () {
-    this.AS.getData().subscribe(
-      ( data : ResponseKanye ) => {
-        console.log( "tu frase de kanye del dia: " + data.quote );
-        this.quote.set( data );
-      },
-    );
+  public ObtainingData() {
+    this.AS.getData().subscribe((data) => {
+      if (data && 'quote' in data) {
+        console.log("tu frase de kanye del dia: " + data.quote);
+        this.quote.set(data as ResponseKanye);
+      } else {
+        console.log("No se pudo obtener una frase de Kanye.");
+        this.quote.set(null);
+      }
+    });
   }
 }

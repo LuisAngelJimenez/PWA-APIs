@@ -26,5 +26,27 @@
         ]
       }
     }
+  ],
+  "dataGroups": [
+    {
+      "name": "animeApi",
+      "urls": ["/animeApi"],
+      "cacheConfig": {
+        "strategy": "freshness",
+        "maxSize": 100,
+        "maxAge": "1d",
+        "timeout": "10s"
+      }
+    },
+    {
+      "name": "usingApi",
+      "urls": ["/usingApi"],
+      "cacheConfig": {
+        "strategy": "freshness",
+        "maxSize": 100,
+        "maxAge": "1d",
+        "timeout": "10s"
+      }
+    }
   ]
 }
