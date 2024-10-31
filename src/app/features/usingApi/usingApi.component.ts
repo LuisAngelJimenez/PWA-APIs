@@ -17,6 +17,7 @@ export default class UsingApiComponent {
     this.ObtainingData();
   }
 
+  
   public ObtainingData() {
     this.AS.getData().subscribe((data) => {
       if (data && 'quote' in data) {
@@ -28,4 +29,6 @@ export default class UsingApiComponent {
       }
     });
   }
+  
+  
 }
