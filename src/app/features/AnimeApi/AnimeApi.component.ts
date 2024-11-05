@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { AnimeApiService } from '../../services/AnimeApi.service';
 import { ResponseAnime } from '../../data/interfaces/response';
+import { AnimeApiData } from '../../services/IndexedDB.service';
 
 @Component({
   selector: 'app-anime-api',
@@ -19,21 +20,31 @@ export default class AnimeApiComponent {
     this.obtainingData();
 
   }
-
   public obtainingData() {
-
-    this.As.ObtainData().subscribe(( response : ResponseAnime ) => {
-
-      console.log( 'obteniendo un anime' , response );
-      console.log( 'obteniendo su título' , response.data.title );
-      console.log( 'obteniendo su imagen ', response.data.images.jpg.large_image_url );
-      this.animeSignal.set({
-        data : {
-          title : response.data.title,
-          images : response.data.images,
-        },
-      });
+    this.As.ObtainData().subscribe( ( response: ResponseAnime | AnimeApiData | undefined ) => {
+      if ( response && 'data' in response ) {
+        console.log( ' Obteniendo un anime ' , response );
+        this.animeSignal.set({
+          data: {
+            title: response.data.title,
+            images: response.data.images,
+          },
+        });
+      } else if ( response && 'title' in response ) {
+        console.log( ' Recuperando desde IndexedDB ' , response );
+        this.animeSignal.set({
+          data: {
+            title: response.title,
+            images: {
+              jpg: {
+                large_image_url: response.imageUrl,
+              }
+            }
+          }
+        });
+      }
     });
-
   }
+  
+  
 }

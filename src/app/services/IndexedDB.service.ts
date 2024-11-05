@@ -7,13 +7,21 @@ export interface ApiData {
   data: ResponseKanye ;
 }
 
+export interface AnimeApiData {
+  id?: number;
+  title: string;
+  imageUrl: string;
+}
+
 export class AppDB extends Dexie {
-  apiData!: Table< ApiData >;
+  apiData! : Table< ApiData >;
+  animeData! : Table< AnimeApiData >; 
 
   constructor() {
     super( ' AppDatabase ' );
     this.version(1).stores({
-      apiData: ' ++id, data ' 
+      apiData : ' ++id, data ',
+      animeData : ' ++id, title, imageUrl ',  
     });
   }
 }
@@ -28,12 +36,21 @@ export class IndexedDbService {
     this.db = new AppDB();
   }
 
-  async saveApiData( apiData : ApiData ): Promise< number > {
+  async saveApiData( apiData : ApiData ) : Promise < number > {
     return await this.db.apiData.add( apiData );
   }
 
-  async getLatestApiData(): Promise<ApiData | undefined> {
+  async getLatestApiData() : Promise< ApiData | undefined > {
     const allData = await this.db.apiData.toArray();
     return allData.length > 0 ? allData[allData.length - 1] : undefined;
+  }
+
+  async saveAnimeData( animeData: AnimeApiData ) : Promise < number > {
+    return await this.db.animeData.add( animeData );
+  }
+
+  async getLatestAnimeData() : Promise < AnimeApiData | undefined > {
+    const allData = await this.db.animeData.toArray();
+    return allData.length > 0 ? allData[ allData.length - 1 ] : undefined;
   }
 }

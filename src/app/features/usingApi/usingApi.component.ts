@@ -19,13 +19,10 @@ export default class UsingApiComponent {
 
   
   public ObtainingData() {
-    this.AS.getData().subscribe((data) => {
-      if (data && 'quote' in data) {
-        console.log("tu frase de kanye del dia: " + data.quote);
-        this.quote.set(data as ResponseKanye);
-      } else {
-        console.log("No se pudo obtener una frase de Kanye.");
-        this.quote.set(null);
+    this.AS.getData().subscribe( ( data ) => {
+      if ( data && 'quote' in data ) {
+        console.log( " tu frase de kanye del dia: " + data.quote );
+        this.quote.set( data as ResponseKanye );
       }
     });
   }

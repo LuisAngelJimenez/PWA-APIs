@@ -13,21 +13,20 @@ export class APIService {
   constructor( private http : HttpClient , private IndexedDbService : IndexedDbService ) {}
 
   public getData() {
-    return this.http.get<ResponseKanye>(this.url).pipe(
-      tap(async (data: ResponseKanye) => {
-        console.log('Guardando la data en IndexedDB');
-        await this.IndexedDbService.saveApiData({ data });
+    return this.http.get< ResponseKanye >( this.url ).pipe(
+      tap(async ( data : ResponseKanye ) => {
+        console.log( ' Guardando la data en IndexedDB ');
+        await this.IndexedDbService.saveApiData( { data } );
       }),
-      catchError(async (error) => {
-        console.error('No hay conexión, obteniendo de la db', error);
-        // Aquí es donde intentamos recuperar los datos de IndexedDB
+      catchError(async ( error ) => {
+        console.error( ' No hay conexión, obteniendo de la db ', error );
         const latestData = await this.IndexedDbService.getLatestApiData();
-        if (latestData && latestData.data) {
-          console.log("Frase de Kanye desde IndexedDB:", latestData.data.quote);
-          return latestData.data; // Devuelve la frase desde IndexedDB
+        if ( latestData && latestData.data ) {
+          console.log( " Frase de Kanye desde IndexedDB: " , latestData.data.quote );
+          return latestData.data;
         } else {
-          console.log("No hay datos en IndexedDB.");
-          return undefined; // O cualquier otro valor por defecto
+          console.log(" No hay datos en IndexedDB. ");
+          return undefined;
         }
       })
     );

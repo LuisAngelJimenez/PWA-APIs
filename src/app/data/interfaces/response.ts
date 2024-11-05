@@ -13,6 +13,8 @@ export interface ResponsePokemon {
   results: Pokemon[];
 }
 
+
+
 export interface ResponseAnime {
     data : {
       title : string;
@@ -23,4 +25,10 @@ export interface ResponseAnime {
       }
     };
   }
+
+  export interface AnimeData {
+    id? : number ;
+    title : string ;
+    imageUrl : string ;
+  }  
   
